@@ -1,0 +1,10 @@
+set(smooth3D_VERSION "@smooth3D_VERSION@")
+
+@PACKAGE_INIT@
+
+set_and_check(smooth3D_INCLUDE_DIR "@PACKAGE_INCLUDE_INSTALL_DIR@")
+#set_and_check(smooth3D_SYSCONFIG_DIR "@PACKAGE_SYSCONFIG_INSTALL_DIR@")
+
+check_required_components(smooth3D)
+
+include("${CMAKE_CURRENT_LIST_DIR}/../smooth3D.cmake")
