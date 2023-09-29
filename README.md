@@ -1,6 +1,6 @@
 # smooth3d
 
-![spack-ci](https://github.com/LIHPC-Computational-Geometry/qtutil/actions/workflows/spack-ci.yml/badge.svg)
+![spack-ci](https://github.com/LIHPC-Computational-Geometry/smooth3d/actions/workflows/spack-ci.yml/badge.svg)
 
 Mesh smoothing library.
 
