@@ -3,8 +3,6 @@
 #==============================================================================
 #project(smooth3D CXX)
 
-#add_definitions(-DDLLEXPORT)
-
 #==============================================================================
 # CODE STRUCTURE
 #==============================================================================
@@ -17,6 +15,12 @@ set(SMOOTH3D_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(SMOOTH3D_HEADER_FILES
 	inc/smooth3D/smooth3d.h
         )
+if (NOT WITH_EXTERNAL_MACHINETYPES)
+    configure_file(inc/machine_types.h.in ${CMAKE_CURRENT_BINARY_DIR}/inc/machine_types.h @ONLY)
+    include_directories("${CMAKE_CURRENT_BINARY_DIR}/inc")
+    set(SMOOTH3D_MACHINETYPES_FILES
+	inc/machine_types.h)
+endif ()
 
 
 set(SMOOTH3D_SRC_FILES
@@ -57,7 +61,9 @@ set(SMOOTH3D_SRC_FILES
 #==============================================================================
 # DEPENDENCIES
 #==============================================================================
-find_package(MachineTypes REQUIRED)
+if (WITH_EXTERNAL_MACHINETYPES)
+    find_package(MachineTypes REQUIRED)
+endif ()
 
 find_package(Lima REQUIRED)
 
@@ -78,7 +84,7 @@ include ("${CMAKE_CURRENT_SOURCE_DIR}/FindMesquite.cmake")
 # LIBRARY BUILDING
 #==============================================================================
 
-add_library(smooth3D ${SMOOTH3D_HEADER_FILES} ${SMOOTH3D_SRC_FILES})
+add_library(smooth3D ${SMOOTH3D_HEADER_FILES} ${SMOOTH3D_MACHINETYPES_FILES} ${SMOOTH3D_SRC_FILES})
 
 #set_target_properties(gmds PROPERTIES PUBLIC_HEADER "${GMDS_HEADER_FILES}")
 
@@ -88,7 +94,9 @@ add_library(smooth3D ${SMOOTH3D_HEADER_FILES} ${SMOOTH3D_SRC_FILES})
 
 target_link_libraries(smooth3D PRIVATE gmds)
 target_link_libraries(smooth3D PRIVATE Lima::Lima Mesquite::Mesquite)
-target_link_libraries(smooth3D PUBLIC MachineTypes::MachineTypes)
+if (WITH_EXTERNAL_MACHINETYPES)
+    target_link_libraries(smooth3D PUBLIC MachineTypes::MachineTypes)
+endif ()
 
 #add_custom_command(
 #   TARGET gmds
@@ -109,6 +117,11 @@ install(TARGETS smooth3D
 
 install(FILES
         ${SMOOTH3D_HEADER_FILES} DESTINATION include/smooth3D)
+if (NOT WITH_EXTERNAL_MACHINETYPES)
+install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/inc/machine_types.h DESTINATION include/)
+endif ()
+
 
 
 set(INCLUDE_INSTALL_DIR include/ )
