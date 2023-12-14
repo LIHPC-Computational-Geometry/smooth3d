@@ -9,7 +9,8 @@
 #define OBJECTIVECONDITION2D_H_
 
 #include "IObjective3D.h"
-#include "GMDS/IG/IG.h"
+#include "gmds/ig/Node.h"
+#include "gmds/ig/Face.h"
 
 namespace Smooth3D {
 

@@ -38,10 +38,10 @@ Real ObjectiveCondition2D::evalF(const Real3 & p) {
 
     gmds::Node adj12, adj21, temp;
     thisFace.getAdjacentNodes(adj1, adj12, temp);
-    if (temp.getID() != m_node.getID())
+    if (temp.id() != m_node.id())
   	  adj12 = temp;
     thisFace.getAdjacentNodes(adj2, adj21, temp);
-    if (temp.getID() != m_node.getID())
+    if (temp.id() != m_node.id())
   	  adj21 = temp;
 
     n12 = Real3(adj12.X(), adj12.Y(), adj12.Z());
@@ -69,10 +69,10 @@ void ObjectiveCondition2D::evalDF(const Real3 & p, Real3 & grad) {
 
     gmds::Node adj12, adj21, temp;
     thisFace.getAdjacentNodes(adj1, adj12, temp);
-    if (temp.getID() != m_node.getID())
+    if (temp.id() != m_node.id())
   	  adj12 = temp;
     thisFace.getAdjacentNodes(adj2, adj21, temp);
-    if (temp.getID() != m_node.getID())
+    if (temp.id() != m_node.id())
   	  adj21 = temp;
 
     n12 = Real3(adj12.X(), adj12.Y(), adj12.Z());
@@ -98,10 +98,10 @@ Real ObjectiveCondition2D::evalFDF(const Real3 & p, Real3 & grad) {
 
     gmds::Node adj12, adj21, temp;
     thisFace.getAdjacentNodes(adj1, adj12, temp);
-    if (temp.getID() != m_node.getID())
+    if (temp.id() != m_node.id())
   	  adj12 = temp;
     thisFace.getAdjacentNodes(adj2, adj21, temp);
-    if (temp.getID() != m_node.getID())
+    if (temp.id() != m_node.id())
   	  adj21 = temp;
 
     n12 = Real3(adj12.X(), adj12.Y(), adj12.Z());

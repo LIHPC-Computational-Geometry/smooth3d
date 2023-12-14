@@ -86,7 +86,7 @@ add_library(smooth3D ${SMOOTH3D_HEADER_FILES} ${SMOOTH3D_SRC_FILES})
 #target_compile_features(gmds PUBLIC cxx_std_11)
 
 
-target_link_libraries(smooth3D PRIVATE gmds)
+target_link_libraries(smooth3D PRIVATE GMDSIg)
 target_link_libraries(smooth3D PRIVATE Lima::Lima Mesquite::Mesquite)
 target_link_libraries(smooth3D PUBLIC MachineTypes::MachineTypes)
 

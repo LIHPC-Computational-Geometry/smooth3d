@@ -13,8 +13,8 @@
 #include <cstdlib>		// pour rand
 
 #include "smooth3D/smooth.h"
-#include <GMDS/IG/IGMesh.h>
-#include <GMDS/IG/IGMeshDoctor.h>
+#include <gmds/ig/Mesh.h>
+#include <gmds/ig/MeshDoctor.h>
 
 #include "math/Real3.h"
 
@@ -32,7 +32,7 @@ extern "C" int S3_Orthogonal2D(
 		int_type n_iter)
 {
   const int tGMDSMask = gmds::DIM3 | gmds::N | gmds::F | gmds::F2N | gmds::N2F;
-  gmds::IGMesh  internal_mesh(tGMDSMask);
+  gmds::Mesh  internal_mesh(tGMDSMask);
 
   gmds::Node * temp_array_nodes = new gmds::Node [nb_nodes];
 
@@ -47,7 +47,7 @@ extern "C" int S3_Orthogonal2D(
     internal_mesh.newFace(nodes_cell);
   }
 
-  gmds::IGMeshDoctor mesh_doc(&internal_mesh);
+  gmds::MeshDoctor mesh_doc(&internal_mesh);
   mesh_doc.updateUpwardConnectivity();
 
   delete[] temp_array_nodes;
@@ -61,14 +61,16 @@ extern "C" int S3_Orthogonal2D(
   for (int iter = 0; iter < n_iter; iter++) {
 
     // LOOP 2 : FOR ALL NODES
-    for (gmds::IGMesh::node_iterator it = internal_mesh.nodes_begin();
-	!it.isDone(); it.next()) {
-      gmds::Node current_node = it.value();
-      if (relax[current_node.getID()] != 0.0) {
+    //for (gmds::Mesh::node_iterator it = internal_mesh.nodes_begin();
+	//!it.isDone(); it.next()) {
+	for (auto i : internal_mesh.nodes()){
+      //gmds::Node current_node = it.value();
+	  auto current_node = internal_mesh.get<gmds::Node>(i);
+      if (relax[current_node.id()] != 0.0) {
 
 	// We are only interested on Relaxed nodes
 	orthogonal.setNode(current_node);
-	int nb_faces = current_node.getNbFaces();
+	int nb_faces = current_node.nbFaces();
 
 	// First face connected to the node is chosen ramdomly
 	int face_int = std::rand() % nb_faces;
@@ -145,12 +147,13 @@ extern "C" int S3_Orthogonal2D(
       }
     }
   }
-
-
-  for (gmds::IGMesh::node_iterator it = internal_mesh.nodes_begin();
- 	!it.isDone(); it.next()) {
-       gmds::Node current_node = it.value();
-       int vtx = current_node.getID();
+	
+//  for (gmds::Mesh::node_iterator it = internal_mesh.nodes_begin();
+// 	!it.isDone(); it.next()) {
+//      gmds::Node current_node = it.value();
+	for (auto i : internal_mesh.nodes()){
+	   auto current_node = internal_mesh.get<gmds::Node>(i);
+       int vtx = current_node.id();
        double rel = relax[vtx];
 
        if (rel  != 0.0)
