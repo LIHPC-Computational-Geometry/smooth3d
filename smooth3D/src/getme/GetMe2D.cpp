@@ -11,13 +11,14 @@
 #include <cstdlib>		// pour rand
 
 #include "smooth3D/smooth.h"
-#include <GMDS/IG/IGMesh.h>
-#include <GMDS/IG/IGMeshDoctor.h>
+#include <gmds/ig/Mesh.h>
+#include <gmds/ig/MeshDoctor.h>
 
 #include "math/Real3.h"
 #include "math/MeanRatio.h"
 
-// Fonction spécialisée pour calculer le meanRatio pour un triangle
+/*
+// Fonction spï¿½cialisï¿½e pour calculer le meanRatio pour un triangle
 static Smooth3D::Real computeMeanRatio(gmds::Node& n0, gmds::Node& n1,
     gmds::Node& n2) {
   Smooth3D::Real3 p[3];
@@ -39,7 +40,7 @@ static Smooth3D::Real computeMeanRatio(gmds::Node& n0, gmds::Node& n1,
   return (mean_ratio);
 }
 
-// Fonction spécialisée pour calculer le meanRatio pour un quadrilatère
+// Fonction spï¿½cialisï¿½e pour calculer le meanRatio pour un quadrilatï¿½re
 static Smooth3D::Real computeMeanRatio(gmds::Node& n0, gmds::Node& n1,
     gmds::Node& n2, gmds::Node& n3) {
   static const int kTriQuads[4][3] = { { 0, 1, 3 }, { 1, 2, 0 }, { 2, 3, 1 }, {
@@ -225,11 +226,11 @@ static FourNodes computeGetMeQuadrangle3D(gmds::Face& face,
   return compute_nodes;
 }
 
-static void computeN2N(gmds::IGMesh& mesh) {
+static void computeN2N(gmds::Mesh& mesh) {
 
   std::map<gmds::TCellID, std::set<gmds::TCellID> > n2n;
 
-  gmds::IGMesh::face_iterator it_faces = mesh.faces_begin();
+  gmds::Mesh::face_iterator it_faces = mesh.faces_begin();
 
   while (!it_faces.isDone()) {
     gmds::Face f = it_faces.value();
@@ -255,14 +256,17 @@ static void computeN2N(gmds::IGMesh& mesh) {
     current_node.set<gmds::Node>(adj_nodes);
   }
 }
-
+*/
 
 extern "C" int S3_GETMe2D(const double alpha, const double beta,
     int_type nb_cells, int_type nb_nodes, const int_type * nb_nodes_per_cell,
     const int_type *nodes_number, double *x, double *y, double *z,
     const double * weights, const double * relax, int_type n_iter) {
+    std::cerr<<"S3_GETMe2D is no longer available."<<std::endl;
+    return -1;
+  /*
   const int kTGMDSMask = gmds::DIM3 | gmds::N | gmds::F | gmds::F2N | gmds::N2N;
-  gmds::IGMesh internal_mesh(kTGMDSMask);
+  gmds::Mesh internal_mesh(kTGMDSMask);
 
   gmds::Node* temp_array_nodes = new gmds::Node[nb_nodes];
 
@@ -284,7 +288,7 @@ extern "C" int S3_GETMe2D(const double alpha, const double beta,
     internal_mesh.newFace(nodes_cell);
   }
 
-  gmds::IGMeshDoctor mesh_doc(&internal_mesh);
+  gmds::MeshDoctor mesh_doc(&internal_mesh);
   mesh_doc.updateUpwardConnectivity();
   computeN2N(internal_mesh);
 
@@ -312,7 +316,7 @@ extern "C" int S3_GETMe2D(const double alpha, const double beta,
       weights_pos[vtx] = 0.0;
     }
 
-    for (gmds::IGMesh::face_iterator it = internal_mesh.faces_begin();
+    for (gmds::Mesh::face_iterator it = internal_mesh.faces_begin();
 	!it.isDone(); it.next()) {
       gmds::Face current_face = it.value();
 
@@ -417,14 +421,16 @@ delete[] new_pos;
 delete[] temp_array_nodes;
 
 return (0);
+*/
 }
 
+/*
 void testGetMeUnitTri(void) {
 Smooth3D::Real theta = M_PI / 6.0;
 Smooth3D::Real lambda = 0.0;
 
 const int kTGmdsMask = gmds::DIM3 | gmds::N | gmds::F | gmds::F2N;
-gmds::IGMesh internal_mesh(kTGmdsMask);
+gmds::Mesh internal_mesh(kTGmdsMask);
 
 // we start with a square triangle
 gmds::Node noeuds[3];
@@ -462,7 +468,7 @@ Smooth3D::Real theta = M_PI / 6.0;
 Smooth3D::Real lambda = 0.25;
 
 const int kTGMDSMask = gmds::DIM3 | gmds::N | gmds::F | gmds::F2N;
-gmds::IGMesh internal_mesh(kTGMDSMask);
+gmds::Mesh internal_mesh(kTGMDSMask);
 
 // we start with a square triangle
 gmds::Node noeuds[4];
@@ -502,7 +508,7 @@ Smooth3D::Real theta = M_PI / 6.0;
 Smooth3D::Real lambda = 0.25;
 
 const int kTGMDSMask = gmds::DIM3 | gmds::N | gmds::F | gmds::F2N;
-gmds::IGMesh internal_mesh(kTGMDSMask);
+gmds::Mesh internal_mesh(kTGMDSMask);
 
 // we start with a non convex quadrangle
 
@@ -538,3 +544,4 @@ for (int i = 0; i < 10; i++) {
 }
 
 }
+*/

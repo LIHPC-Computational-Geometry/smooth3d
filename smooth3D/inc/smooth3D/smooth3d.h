@@ -39,6 +39,7 @@ int S3_ConditionNumber2D(int_type nb_cells, int_type nb_nodes,
     double *y, double *z, const double * weights, const double * relax,
     int_type n_iter);
 
+// S3_GETMe2D is no longer available.
 int S3_GETMe2D(const double alpha, const double beta, int_type nb_cells,
     int_type nb_nodes, const int_type * nb_nodes_per_cell,
     const int_type *nodes_number, double *x, double *y, double *z,
