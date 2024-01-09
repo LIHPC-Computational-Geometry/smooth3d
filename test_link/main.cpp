@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <smooth3D/smooth.h>
+#include <smooth3D/smooth3D.h>
 
 int main() {
 
