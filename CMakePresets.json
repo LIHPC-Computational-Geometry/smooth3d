@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "configurePresets": [
+      {
+        "name": "ci",
+        "cacheVariables": {
+          "CMAKE_POSITION_INDEPENDENT_CODE": "ON",
+          "gmds_ROOT": "$env{INSTALL_DIR}/gmds072",
+          "Lima_ROOT": "$env{INSTALL_DIR}/lima"
+        }
+      }
+    ]
+}
+  
