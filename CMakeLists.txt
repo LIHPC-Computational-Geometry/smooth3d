@@ -5,7 +5,7 @@ include(CMakePrintHelpers)
 
 project(smooth3D 
   LANGUAGES C CXX 
-  VERSION 3.2.0)
+  VERSION 3.3.0)
 
 cmake_print_variables(smooth3D_VERSION)
 

@@ -1,3 +1,6 @@
+include(CMakeFindDependencyMacro)
+find_dependency(MachineTypes)
+
 set(smooth3D_VERSION "@smooth3D_VERSION@")
 
 @PACKAGE_INIT@
