@@ -6,9 +6,9 @@
         "cacheVariables": {
           "CMAKE_POSITION_INDEPENDENT_CODE": "ON",
           "Mesquite_ROOT": "$env{INSTALL_DIR}/mesquite-2.3.0",
-          "gmds_ROOT": "$env{INSTALL_DIR}/gmds072",
+          "gmds_ROOT": "$env{INSTALL_DIR}/gmds",
           "Lima_ROOT": "$env{INSTALL_DIR}/lima",
-	  "MachineTypes_ROOT": "$env{INSTALL_DIR}/machine_types"
+          "MachineTypes_ROOT": "$env{INSTALL_DIR}/machine_types"
         }
       }
     ]
