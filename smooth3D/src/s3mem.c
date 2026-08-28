@@ -6,6 +6,8 @@
 
 #include "smooth3D/smooth.h"
 
+#include <stdlib.h>
+
 void s3Free (void * p)
 {
 #ifdef DEBUG_MEM
